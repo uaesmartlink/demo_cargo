@@ -121,6 +121,7 @@ Route::post('/subsubcategories/get_attributes_by_subsubcategory', 'SubSubCategor
 
 //Home Page
 Route::group(['middleware'=>'ThemeChanger'], function() {
+    Route::get('/', 'HomeController@admin_dashboard')->name('home');
     Route::get('/shipment-calc', 'ShipmentController@shipmentCalc')->name('shipment-calc');
 });
 
@@ -141,5 +142,6 @@ Route::get('/{slug}', 'PageController@show_custom_page')->name('custom-pages.sho
 //ajax validation
 Route::get('user/check-email','ValidationController@ajax_check_email')->name('user.checkEmail');
 
-Route::get('/', 'HomeController@admin_dashboard')->name('home');
-
+Route::fallback(function() {
+    return view('app');
+ });

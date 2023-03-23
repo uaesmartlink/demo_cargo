@@ -61,7 +61,7 @@ Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'user_role:customer']
 	Route::post('import/parse', 'ShipmentController@parseImport')->name('admin.shipments.import_parse');
 });
 
-Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'user_role:admin|staff|customer|branch']], function(){
+Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'user_role:admin|staff|branch']], function(){
 
     Route::get('shipments/add-shipment-api','ShipmentController@addShipmentByApi')->name('admin.shipments.add.by.api');
 	//Update Routes

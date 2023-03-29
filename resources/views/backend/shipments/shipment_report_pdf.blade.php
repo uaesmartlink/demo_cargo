@@ -157,7 +157,7 @@
                             @foreach($shipments as $key=>$shipment)
 
                             <tr>
-                                <td width="3%">{{ ($key+1) + ($shipments->currentPage() - 1)*$shipments->perPage() }}</td>
+                                <td width="3%">{{ ($key+1) }}</td>
                                 <td width="5%">D{{$shipment->code}}</td>
                                 <td><a href="">{{$shipment->getStatus()}}</a></td>
                                 <td>{{$shipment->type}}</td>

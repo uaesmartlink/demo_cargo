@@ -154,7 +154,7 @@
                             // $shipment_cost = $helper->calcMissionShipmentsAmount($mission->getOriginal('type'),$mission->id);
                             $total_amount += $amount;
                         @endphp
-                        <td>{{format_price($total_amount)}}</td>
+                        <td>{{format_price($amount)}}</td>
                         {{-- @if(isset($show_due_date)) <td>{{$mission->due_date ?? "-"}}</td> @endif --}}
                         <td><span class="btn btn-sm btn-{{\App\Mission::getStatusColor($mission->status_id)}}">{{$mission->getStatus()}}</span></td>
                         <td class="text-center">

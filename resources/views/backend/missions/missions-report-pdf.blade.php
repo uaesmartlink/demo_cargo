@@ -173,8 +173,9 @@
                                         @endif
                                         @php
                                             $helper = new \App\Http\Helpers\TransactionHelper();
-                                            $shipment_cost = $helper->calcMissionShipmentsAmount($mission->getOriginal('type'),$mission->id);
-                                            $total_amount += $shipment_cost;
+                                            $amount = $mission->shipment_mission[0]->shipment->amount_to_be_collected + $mission->shipment_mission[0]->shipment->shipping_cost;
+                                            // $shipment_cost = $helper->calcMissionShipmentsAmount($mission->getOriginal('type'),$mission->id);
+                                            $total_amount += $amount;
                                         @endphp
 
                                         <td>{{format_price($shipment_cost)}}</td>

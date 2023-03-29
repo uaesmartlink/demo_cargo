@@ -21,7 +21,7 @@ $user_type = Auth::user()->user_type;
                             </span>
                         </li>
 
-                        @if( in_array($user_type,['admin','customer','captain','branch']) || in_array('1108', json_decode(Auth::user()->staff->role->permissions ?? "[]")))
+                        @if( in_array($user_type,['admin','branch']) || in_array('1108', json_decode(Auth::user()->staff->role->permissions ?? "[]")))
                             <li class="menu-item {{ areActiveRoutes(['admin.shipments.create'])}}" aria-haspopup="true">
                                 <a href="{{ route('admin.shipments.create') }}" class="menu-link">
                                         <i class="menu-bullet menu-icon flaticon2-plus" style="font-size: 10px;"></i>
@@ -29,14 +29,14 @@ $user_type = Auth::user()->user_type;
                                 </a>
                             </li>
 
-                            @if(in_array($user_type,['customer']))
+                            {{-- @if(in_array($user_type,['customer']))
                                 <li class="menu-item {{ areActiveRoutes(['admin.shipments.import'])}}" aria-haspopup="true">
                                     <a href="{{ route('admin.shipments.import') }}" class="menu-link">
                                         <i class="menu-bullet menu-icon flaticon2-plus" style="font-size: 10px;"></i>
                                         <span class="menu-text">{{translate('Import Shipments')}}</span>
                                     </a>
                                 </li>
-                            @endif
+                            @endif --}}
 
                         @endif
 

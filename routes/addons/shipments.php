@@ -61,7 +61,7 @@ Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'user_role:customer']
 	Route::post('import/parse', 'ShipmentController@parseImport')->name('admin.shipments.import_parse');
 });
 
-Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'user_role:admin|staff|branch']], function(){
+Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'user_role:admin|staff|customer|branch']], function(){
 
     Route::get('shipments/add-shipment-api','ShipmentController@addShipmentByApi')->name('admin.shipments.add.by.api');
 	//Update Routes
@@ -81,13 +81,11 @@ Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'user_role:admin|staf
     Route::post('shipments/shipments-report-results','ShipmentController@shipmentsReportPDF')->name('admin.shipments.report.pdf');
     Route::post('shipments/shipments-report/results','ShipmentController@exportShipmentsReport')->name('admin.shipments.post.report');
     Route::post('shipments/print/stickers','ShipmentController@printStickers')->name('admin.shipments.print.stickers');
+    Route::get('shipments/delete/{shipment}','ShipmentController@destroy')->name('admin.shipments.delete-shipment');
+    Route::patch('shipments/update/{shipment}','ShipmentController@update')->name('admin.shipments.update-shipment');
     Route::resource('shipments','ShipmentController',[
         'as' => 'admin'
     ]);
-
-    Route::get('shipments/delete/{shipment}','ShipmentController@destroy')->name('admin.shipments.delete-shipment');
-    Route::patch('shipments/update/{shipment}','ShipmentController@update')->name('admin.shipments.update-shipment');
-
     //Auto Route Creation Based on Statuses Function in Shipment Model
     foreach(\App\Shipment::status_info() as $item)
     {

@@ -330,7 +330,7 @@ class MissionsController extends Controller
             }
 
         }
-        $missions = $missions->orderBy('id','DESC')->paginate(20);
+        $missions = $missions->orderBy('id','DESC')->get();
         $page_name = translate('Missions Report');
         $status = 'all';
 

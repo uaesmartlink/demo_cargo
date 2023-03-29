@@ -1301,7 +1301,6 @@ class ShipmentController extends Controller
         }
         $shipments = $shipments->orderBy('id','DESC')->get();
 
-
         $total_amounts = $shipments->sum('amount_to_be_collected');
         $total_shipping_cost = $shipments->sum('shipping_cost');
         $total_amounts = $total_amounts + $total_shipping_cost;

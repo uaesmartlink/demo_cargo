@@ -149,22 +149,22 @@
 
                                     <tr>
                                         @if($user_type == 'admin' || in_array('1100', $staff_permission) || in_array('1008', $staff_permission) )
-                                            <td width="3%"><a href="{{route('admin.missions.show', $mission->id)}}">{{ ($key+1) + ($missions->currentPage() - 1)*$missions->perPage() }}</a></td>
-                                            <td width="5%"><a href="{{route('admin.missions.show', $mission->id)}}">{{$mission->code}}</a></td>
-                                            <td width="5%"><a href="{{route('admin.shipments.show', ['shipment'=>$mission->shipment_mission[0]->shipment->id])}}">{{$mission->shipment_mission[0]->shipment->code}}</a></td>
+                                            <td width="3%">{{ ($key+1) + ($missions->currentPage() - 1)*$missions->perPage() }}</td>
+                                            <td width="5%">{{$mission->code}}</td>
+                                            <td width="5%">{{$mission->shipment_mission[0]->shipment->code}}</td>
                                         @else
                                             <td width="3%">{{ ($key+1) + ($missions->currentPage() - 1)*$missions->perPage() }}</td>
-                                            <td width="5%"><a href="{{route('admin.missions.show', $mission->id)}}">{{$mission->code}}</a></td>
-                                            <td width="5%"><a href="{{route('admin.shipments.show', ['shipment'=>$mission->shipment_mission[0]->shipment->id])}}">{{$mission->shipment_mission[0]->shipment->code}}</a></td>
+                                            <td width="5%">{{$mission->code}}</td>
+                                            <td width="5%">{{$mission->shipment_mission[0]->shipment->code}}</td>
                                         @endif
                                         <td>{{ $mission->getOriginal('type') == 1 ? $mission->shipment_mission[0]->shipment->client_phone : $mission->shipment_mission[0]->shipment->reciver_phone }}</td>
                                         <td>{{ $mission->getOriginal('type') == 1 ? \App\Area::find($mission->shipment_mission[0]->shipment->from_area_id)->name: \App\Area::find($mission->shipment_mission[0]->shipment->to_area_id)->name }}
 
-                                        <td><a href="{{route('admin.clients.show', $mission->shipment_mission[0]->shipment->client_id)}}">{{\App\Client::find($mission->shipment_mission[0]->shipment->client_id)->name}}</a></td>
+                                        <td>{{\App\Client::find($mission->shipment_mission[0]->shipment->client_id)->name}}</td>
 
                                         @if ($mission->captain_id)
                                             @if($user_type == 'admin' || in_array('1007', $staff_permission) )
-                                                <td><a href="{{route('admin.captains.show', $mission->captain->id)}}">{{$mission->captain->name}}</a></td>
+                                                <td>{{$mission->captain->name}}</td>
                                             @else
                                                 <td>{{$mission->captain->name}}</td>
                                             @endif

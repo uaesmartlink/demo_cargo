@@ -159,20 +159,13 @@
                             <tr>
                                 <td width="3%">{{ ($key+1) }}</td>
                                 <td width="5%">D{{$shipment->code}}</td>
-                                <td><a href="">{{$shipment->getStatus()}}</a></td>
+                                <td>{{$shipment->getStatus()}}</td>
                                 <td>{{$shipment->type}}</td>
                                 @if($user_type == 'admin' || in_array('1005', $staff_permission)  )
-                                    <td><a href="{{route('admin.clients.show',$shipment->client_id)}}">{{$shipment->client->name}}</a></td>
+                                    <td>{{$shipment->client->name}}</td>
                                 @else
                                     <td>{{$shipment->client->name}}</td>
                                 @endif
-                                {{-- Hide For Demo --}}
-                                {{-- @if($user_type == 'admin' || in_array('1006', $staff_permission)  )
-                                    <td><a href="{{route('admin.branchs.show',$shipment->branch_id)}}">{{$shipment->branch->name}}</a></td>
-                                @else
-                                    <td>{{$shipment->branch->name}}</td>
-                                @endif --}}
-
                                 <td>{{$shipment->shipping_cost}}</td>
                                 <td>{{$shipment->amount_to_be_collected + $shipment->shipping_cost}}</td>
                                 {{-- <td>{{$shipment->pay->name ?? ""}}</td> --}}

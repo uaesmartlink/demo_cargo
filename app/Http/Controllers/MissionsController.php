@@ -292,9 +292,9 @@ class MissionsController extends Controller
             $page_name = translate('All Missions');
         }
         if(isset($missions)){
-            $missions = $missions->orderBy('id','DESC')->paginate(20);
+            $missions = $missions->orderBy('id','DESC')->paginate(500);
         }else{
-            $missions = Mission::orderBy('id','DESC')->paginate(20);
+            $missions = Mission::orderBy('id','DESC')->paginate(500);
         }
         $dashboard_active_links = true;
         $status = 'all';

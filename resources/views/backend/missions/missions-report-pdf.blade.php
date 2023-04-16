@@ -149,22 +149,22 @@
 
                                     <tr>
                                         @if($user_type == 'admin' || in_array('1100', $staff_permission) || in_array('1008', $staff_permission) )
-                                            <td width="3%">{{ ($key+1) + ($missions->currentPage() - 1)*$missions->perPage() }}</td>
-                                            <td width="5%">{{$mission->code}}</td>
-                                            <td width="5%">{{$mission->shipment_mission[0]->shipment->code}}</td>
+                                            <td width="3%"><a href="{{route('admin.missions.show', $mission->id)}}">{{ ($key+1) + ($missions->currentPage() - 1)*$missions->perPage() }}</a></td>
+                                            <td width="5%"><a href="{{route('admin.missions.show', $mission->id)}}">{{$mission->code}}</a></td>
+                                            <td width="5%"><a href="{{route('admin.shipments.show', ['shipment'=>$mission->shipment_mission[0]->shipment->id])}}">{{$mission->shipment_mission[0]->shipment->code}}</a></td>
                                         @else
                                             <td width="3%">{{ ($key+1) + ($missions->currentPage() - 1)*$missions->perPage() }}</td>
-                                            <td width="5%">{{$mission->code}}</td>
-                                            <td width="5%">{{$mission->shipment_mission[0]->shipment->code}}</td>
+                                            <td width="5%"><a href="{{route('admin.missions.show', $mission->id)}}">{{$mission->code}}</a></td>
+                                            <td width="5%"><a href="{{route('admin.shipments.show', ['shipment'=>$mission->shipment_mission[0]->shipment->id])}}">{{$mission->shipment_mission[0]->shipment->code}}</a></td>
                                         @endif
                                         <td>{{ $mission->getOriginal('type') == 1 ? $mission->shipment_mission[0]->shipment->client_phone : $mission->shipment_mission[0]->shipment->reciver_phone }}</td>
                                         <td>{{ $mission->getOriginal('type') == 1 ? \App\Area::find($mission->shipment_mission[0]->shipment->from_area_id)->name: \App\Area::find($mission->shipment_mission[0]->shipment->to_area_id)->name }}
 
-                                        <td>{{\App\Client::find($mission->shipment_mission[0]->shipment->client_id)->name}}</td>
+                                        <td><a href="{{route('admin.clients.show', $mission->shipment_mission[0]->shipment->client_id)}}">{{\App\Client::find($mission->shipment_mission[0]->shipment->client_id)->name}}</a></td>
 
                                         @if ($mission->captain_id)
                                             @if($user_type == 'admin' || in_array('1007', $staff_permission) )
-                                                <td>{{$mission->captain->name}}</td>
+                                                <td><a href="{{route('admin.captains.show', $mission->captain->id)}}">{{$mission->captain->name}}</a></td>
                                             @else
                                                 <td>{{$mission->captain->name}}</td>
                                             @endif
@@ -172,12 +172,12 @@
                                             <td>{{translate('No Driver')}}</td>
                                         @endif
                                         @php
-                                        // $helper = new \App\Http\Helpers\TransactionHelper();
-                                        $amount = $mission->shipment_mission[0]->shipment->amount_to_be_collected + $mission->shipment_mission[0]->shipment->shipping_cost;
-                                        // $shipment_cost = $helper->calcMissionShipmentsAmount($mission->getOriginal('type'),$mission->id);
-                                        $total_amount += $amount;
-                                    @endphp
-                                    <td>{{format_price($amount)}}</td>
+                                            $helper = new \App\Http\Helpers\TransactionHelper();
+                                            $shipment_cost = $helper->calcMissionShipmentsAmount($mission->getOriginal('type'),$mission->id);
+                                            $total_amount += $shipment_cost;
+                                        @endphp
+
+                                        <td>{{format_price($shipment_cost)}}</td>
                                         {{-- @if(isset($show_due_date)) <td>{{$mission->due_date ?? "-"}}</td> @endif --}}
                                         <td><span class="btn btn-sm btn-{{\App\Mission::getStatusColor($mission->status_id)}}">{{$mission->getStatus()}}</span></td>
                                     </tr>

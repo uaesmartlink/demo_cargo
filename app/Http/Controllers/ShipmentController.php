@@ -1299,7 +1299,7 @@ class ShipmentController extends Controller
         }elseif(Auth::user()->user_type == 'branch'){
             $shipments = $shipments->where('branch_id', Auth::user()->userBranch->branch_id);
         }
-        $shipments = $shipments->orderBy('id','DESC')->paginate(1500);
+        $shipments = $shipments->orderBy('id','DESC')->paginate(20);
         $total_amounts = $shipments->sum('amount_to_be_collected');
         $total_shipping_cost = $shipments->sum('shipping_cost');
         $total_amounts = $total_amounts + $total_shipping_cost;

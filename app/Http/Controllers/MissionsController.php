@@ -34,6 +34,7 @@ class MissionsController extends Controller
      */
     public function index(Request $request)
     {
+        dd($request);
         if(isset($request->status) && !empty($request->status)) {
             if($request->status == 'all')
             {
@@ -68,6 +69,7 @@ class MissionsController extends Controller
         }
         $dashboard_active_links = true;
         $reasons = Reason::where("type","remove_shipment_from_mission")->get();
+        dd($reasons);
         return view('backend.missions.index',compact('missions','dashboard_active_links','page_name','reasons'));
     }
 

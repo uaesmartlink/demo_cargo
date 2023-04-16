@@ -149,7 +149,7 @@
                             <td>{{translate('No Driver')}}</td>
                         @endif
                         @php
-                            $helper = new \App\Http\Helpers\TransactionHelper();
+                            // $helper = new \App\Http\Helpers\TransactionHelper();
                             $amount = $mission->shipment_mission[0]->shipment->amount_to_be_collected + $mission->shipment_mission[0]->shipment->shipping_cost;
                             // $shipment_cost = $helper->calcMissionShipmentsAmount($mission->getOriginal('type'),$mission->id);
                             $total_amount += $amount;
